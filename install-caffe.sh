@@ -11,10 +11,6 @@ sudo apt-get -y install libgflags-dev libgoogle-glog-dev liblmdb-dev
 cd ~/
 git clone https://github.com/BVLC/caffe
 cd ~/caffe
-# pull patch to avoid pycaffe warnings
-git remote add patch https://github.com/TanLingxiao/caffe.git
-git fetch patch patch-2
-git pull --no-commit patch patch-2
 # copy & edit Makefile to use CPU only and build with python layers
 cp Makefile.config.example Makefile.config
 sed -i 's/# CPU_ONLY := 1/CPU_ONLY := 1/g' Makefile.config
