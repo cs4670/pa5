@@ -16,6 +16,7 @@ if [[ ! -d ~/caffe ]]; then
 fi
 cd ~/caffe
 # pull out a specific commit (for consistency)
+git fetch --all
 git checkout f623d04c0e05b9c047cdeb5cbafc53d4ff0989bb
 # copy & edit Makefile to use CPU only and build with python layers
 cp Makefile.config.example Makefile.config
