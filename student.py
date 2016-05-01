@@ -1,6 +1,8 @@
 """
                      PA5 STUDENT IMPLEMENATION
                      -------------------------
+
+PLEASE LOOK IN THE IPYTHON NOTEBOOK FOR THE ASSIGNMENT DESCRIPTION.
 """
 
 # Answer TODO 1 as a comment here:
