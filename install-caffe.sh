@@ -26,7 +26,7 @@ sed -i 's/# WITH_PYTHON_LAYER := 1/WITH_PYTHON_LAYER := 1/g' Makefile.config
 
 # make it!
 make clean
-make -j$(nproc)
+make -j$(nproc) all
 make -j$(nproc) test
 make runtest
 
