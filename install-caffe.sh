@@ -1,7 +1,9 @@
 #!/bin/bash
+set -x
+sudo apt-get update
+set -e
 
 # install caffe's dependencies
-sudo apt-get update
 sudo apt-get -y install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
 sudo apt-get -y install --no-install-recommends libboost-all-dev
 sudo apt-get -y install libatlas-base-dev
@@ -9,19 +11,22 @@ sudo apt-get -y install libgflags-dev libgoogle-glog-dev liblmdb-dev
 
 # download caffe and edit makefile
 cd ~/
-git clone https://github.com/BVLC/caffe
+if [[ ! -d ~/caffe ]]; then
+	git clone https://github.com/BVLC/caffe
+fi
 cd ~/caffe
-# pull patch to avoid pycaffe warnings
-git remote add patch https://github.com/TanLingxiao/caffe.git
-git fetch patch patch-2
-git pull --no-commit patch patch-2
+# pull out a specific commit (for consistency)
+git fetch --all
+git checkout master
+git reset --hard f623d04c0e05b9c047cdeb5cbafc53d4ff0989bb
 # copy & edit Makefile to use CPU only and build with python layers
 cp Makefile.config.example Makefile.config
 sed -i 's/# CPU_ONLY := 1/CPU_ONLY := 1/g' Makefile.config
 sed -i 's/# WITH_PYTHON_LAYER := 1/WITH_PYTHON_LAYER := 1/g' Makefile.config
 
 # make it!
-make -j$(nproc)
+make clean
+make -j$(nproc) all
 make -j$(nproc) test
 make runtest
 

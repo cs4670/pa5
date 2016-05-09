@@ -142,8 +142,9 @@ def feature_inversion_gradient(net, data, blob_name, target_feat, regularization
     Compute the gradient for make_feature_inversion (dL / dI).
 
     :param net: a caffe Net object
-    :param target_feat: target feature
     :param data: shape (3, 227, 227) the current solution
+    :param blob_name: which caffe blob name (script \ell in the notebook)
+    :param target_feat: target feature
     :param regularization: weight (lambda) applied to the regularizer.
     """
     grad = np.zeros_like(data) # placeholder
